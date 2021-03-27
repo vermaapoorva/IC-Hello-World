@@ -51,38 +51,39 @@ class _GoalsState extends State<Goals> {
               padding: const EdgeInsets.all(20),
               itemCount: entries.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    color: Colors.lightBlue,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(width: 12),
-                      Icon(Icons.check_box_outline_blank),
-                      SizedBox(width: 12),
-                      Center(child: Text('Entry ${entries[index]}')),
-                      // Yeah don't ask me why but it works...
-                      Spacer(),
-                      Spacer(),
-                      Spacer(),
-                      Spacer(),
-                      Spacer(),
-                      Spacer(),
-                      Expanded(child: Icon(Icons.arrow_forward_ios_sharp))
-                    ],
-                  )
-                );
+                return Goal();
+                //   Container(
+                //   height: 50,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                //     color: Colors.lightBlue,
+                //     boxShadow: [
+                //       BoxShadow(
+                //         color: Colors.grey.withOpacity(0.5),
+                //         spreadRadius: 5,
+                //         blurRadius: 7,
+                //         offset: Offset(0, 3), // changes position of shadow
+                //       ),
+                //     ],
+                //   ),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       SizedBox(width: 12),
+                //       Icon(Icons.check_box_outline_blank),
+                //       SizedBox(width: 12),
+                //       Center(child: Text('Entry ${entries[index]}')),
+                //       // Yeah don't ask me why but it works...
+                //       Spacer(),
+                //       Spacer(),
+                //       Spacer(),
+                //       Spacer(),
+                //       Spacer(),
+                //       Spacer(),
+                //       Expanded(child: Icon(Icons.arrow_forward_ios_sharp))
+                //     ],
+                //   )
+                // );
               },
               separatorBuilder: (BuildContext context, int index) => const Divider(),
             ),
@@ -93,4 +94,61 @@ class _GoalsState extends State<Goals> {
 
     );
   }
+}
+
+class Goal extends StatefulWidget {
+  @override
+  _Goal createState() => _Goal();
+}
+
+class _Goal extends State<Goal> {
+  bool _isChecked = false;
+
+  void _toggleChecked() {
+    setState(() {
+      if (_isChecked) {
+        _isChecked = false;
+      } else {
+        _isChecked = true;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          color: (_isChecked ? Colors.lightBlueAccent : Colors.blueAccent),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+                icon: (_isChecked ? Icon(Icons.check_box_outlined) : Icon(Icons.check_box_outline_blank)),
+                onPressed: _toggleChecked,
+            ),
+            Center(child: Text('Entry X')),
+            // Yeah don't ask me why but it works...
+            Spacer(),
+            Spacer(),
+            Spacer(),
+            Spacer(),
+            Spacer(),
+            Spacer(),
+            Expanded(child: Icon(Icons.arrow_forward_ios_sharp))
+          ],
+        )
+    );
+  }
+
 }
