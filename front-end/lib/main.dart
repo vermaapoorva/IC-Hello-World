@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'pages/HomePage.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-// import 'HomeScreen/HomeScreen.dart';
 
 void main() {
   runApp(MyApp());
