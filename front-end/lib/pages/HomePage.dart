@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:goal_app/pages/Goals.dart';
 import 'PlaceholderWidget.dart';
+import 'Groups.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -16,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Goals(),
     PlaceholderWidget(Colors.orange),
     PlaceholderWidget(Colors.yellow),
-    PlaceholderWidget(Colors.green),
+    PlaceholderWidget(Colors.yellow),
     PlaceholderWidget(Colors.blue),
   ];
 

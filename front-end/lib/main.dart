@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: LoginScreen(title: 'Goals'),
-      home: LoginScreen(),
+      home: MyHomePage(title: "Goals"),
+      // home: LoginScreen(),
     );
   }
 }

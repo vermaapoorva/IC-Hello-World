@@ -48,7 +48,7 @@ class _GoalsState extends State<Goals> {
             child: ListView.separated(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(30),
               itemCount: entries.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
