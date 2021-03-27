@@ -15,7 +15,7 @@ class SearchPage extends StatelessWidget {
 
 class UserSearch extends SearchDelegate<String> {
   final history = [];
-  final exampleStrings = ['Apoorva', 'Rohan', 'Rahil', 'Alex'];
+  final exampleStrings = ['Apoorva', 'Rohan', 'Rahil', 'Alex', 'Gavin'];
 
   // The clear button of the search bar
   @override
