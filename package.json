@@ -1,0 +1,19 @@
+{
+  "name": "ichelloworld",
+  "version": "1.0.0",
+  "description": "IC Hello World",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vermaapoorva/IC-Hello-World.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vermaapoorva/IC-Hello-World/issues"
+  },
+  "homepage": "https://github.com/vermaapoorva/IC-Hello-World#readme"
+}
