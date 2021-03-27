@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'HomeScreen/HomeScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,9 +59,9 @@ class LoginScreen extends StatelessWidget {
       // onSignup: _authUser,
       emailValidator: invalidUsername,
       onSubmitAnimationCompleted: () {
-        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //   builder: (context) => DashboardScreen(),
-        // ));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ));
       },
       messages: LoginMessages(
         usernameHint: "Username"
