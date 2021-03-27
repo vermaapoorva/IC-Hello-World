@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'PlaceholderWidget.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -10,6 +11,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex;
+  final List<Widget> _children = [
+    PlaceholderWidget(Colors.red),
+    PlaceholderWidget(Colors.orange),
+    PlaceholderWidget(Colors.yellow),
+    PlaceholderWidget(Colors.green),
+    PlaceholderWidget(Colors.blue),
+  ];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: _children[currentIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add),
