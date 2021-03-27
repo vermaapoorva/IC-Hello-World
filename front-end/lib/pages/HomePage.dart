@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:goal_app/pages/SearchPage.dart';
+import 'package:goal_app/pages/Goals.dart';
 import 'PlaceholderWidget.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -14,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex;
   final List<Widget> _children = [
-    PlaceholderWidget(Colors.red),
+    Goals(),
     PlaceholderWidget(Colors.orange),
     SearchPage(),
     PlaceholderWidget(Colors.green),
@@ -53,8 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
         opacity: .2,
         currentIndex: currentIndex,
         onTap: changePage,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-        //border radius doesn't work when the notch is enabled.
+        borderRadius: BorderRadius.vertical(
+            top: Radius.circular(
+                16)), //border radius doesn't work when the notch is enabled.
         elevation: 8,
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
