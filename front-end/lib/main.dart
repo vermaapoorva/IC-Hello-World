@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: LoginScreen(title: 'Goals'),
-      home: MyHomePage(title: 'Goals'),
+      home: LoginScreen(),
     );
   }
 }
@@ -53,18 +53,26 @@ class MyApp extends StatelessWidget {
 
 class LoginScreen extends StatelessWidget {
 
+
   @override
   Widget build(BuildContext context) {
+    Future<String> submit(LoginData ld) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage(title: "Goals")));
+      print("Changing page");
+      return Future.delayed(
+        Duration(seconds: 2),
+            () => 'Large Latte',
+      );
+    }
+
     return FlutterLogin(
       title: 'Tether',
       // logo: 'images/lake.jpg',
       emailValidator: invalidUsername,
       passwordValidator: invalidPassword,
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MyHomePage(),
-        ));
-      },
+      onLogin: submit,
       messages: LoginMessages(
         usernameHint: "Username"
       ),
