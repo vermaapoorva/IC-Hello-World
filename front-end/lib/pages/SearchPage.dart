@@ -14,7 +14,7 @@ class SearchPage extends StatelessWidget {
 }
 
 class UserSearch extends SearchDelegate<String> {
-  final history = ['Hello', 'This', 'Is', 'The', 'History'];
+  final history = [];
   final exampleStrings = ['Apoorva', 'Rohan', 'Rahil', 'Alex'];
 
   // The clear button of the search bar
@@ -43,6 +43,7 @@ class UserSearch extends SearchDelegate<String> {
   // This needs to be a profile
   @override
   Widget buildResults(BuildContext context) {
+    history.add(query);
     return Card(
       color: Colors.red,
       child: Center(
