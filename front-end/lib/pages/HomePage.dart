@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:goal_app/pages/SearchPage.dart';
 import 'package:goal_app/pages/Goals.dart';
 import 'PlaceholderWidget.dart';
 
@@ -15,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _children = [
     Goals(),
     PlaceholderWidget(Colors.orange),
-    PlaceholderWidget(Colors.yellow),
+    SearchPage(),
     PlaceholderWidget(Colors.green),
     PlaceholderWidget(Colors.blue),
   ];
@@ -81,10 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text("Account")),
           BubbleBottomBarItem(
               backgroundColor: Colors.indigo,
-              icon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
+              icon: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    showSearch(context: context, delegate: UserSearch());
+                  }),
               activeIcon: Icon(
                 Icons.search,
                 color: Colors.indigo,
