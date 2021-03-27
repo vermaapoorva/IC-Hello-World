@@ -62,6 +62,9 @@ class LoginScreen extends StatelessWidget {
         //   builder: (context) => DashboardScreen(),
         // ));
       },
+      messages: LoginMessages(
+        usernameHint: "Username"
+      ),
       // onRecoverPassword: _recoverPassword,
     );
   }
