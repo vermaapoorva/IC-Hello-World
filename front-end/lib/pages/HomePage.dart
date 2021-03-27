@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:goal_app/pages/SearchPage.dart';
 import 'PlaceholderWidget.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -14,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _children = [
     PlaceholderWidget(Colors.red),
     PlaceholderWidget(Colors.orange),
-    PlaceholderWidget(Colors.yellow),
+    SearchPage(),
     PlaceholderWidget(Colors.green),
     PlaceholderWidget(Colors.blue),
   ];
@@ -51,9 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
         opacity: .2,
         currentIndex: currentIndex,
         onTap: changePage,
-        borderRadius: BorderRadius.vertical(
-            top: Radius.circular(
-                16)), //border radius doesn't work when the notch is enabled.
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        //border radius doesn't work when the notch is enabled.
         elevation: 8,
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
@@ -80,10 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text("Account")),
           BubbleBottomBarItem(
               backgroundColor: Colors.indigo,
-              icon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
+              icon: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    showSearch(context: context, delegate: UserSearch());
+                  }),
               activeIcon: Icon(
                 Icons.search,
                 color: Colors.indigo,

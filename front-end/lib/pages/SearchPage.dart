@@ -4,14 +4,11 @@ import 'package:flutter/widgets.dart';
 class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Search For Friends'), actions: <Widget>[
-        IconButton(
+    return Scaffold(body: IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
               showSearch(context: context, delegate: UserSearch());
-            })
-      ]),
+            }),
     );
   }
 }
