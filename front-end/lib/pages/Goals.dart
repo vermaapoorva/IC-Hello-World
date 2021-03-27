@@ -51,7 +51,7 @@ class _GoalsState extends State<Goals> {
               padding: const EdgeInsets.all(20),
               itemCount: entries.length,
               itemBuilder: (BuildContext context, int index) {
-                return Goal();
+                return Goal(name: entries[index]);
                 //   Container(
                 //   height: 50,
                 //   decoration: BoxDecoration(
@@ -97,6 +97,12 @@ class _GoalsState extends State<Goals> {
 }
 
 class Goal extends StatefulWidget {
+  Goal({Key key, this.name}) : super(key: key);
+  final String name;
+  // String name;
+  // Goal(String name) {
+  //   this.name = name;
+  // }
   @override
   _Goal createState() => _Goal();
 }
@@ -137,7 +143,7 @@ class _Goal extends State<Goal> {
                 icon: (_isChecked ? Icon(Icons.check_box_outlined) : Icon(Icons.check_box_outline_blank)),
                 onPressed: _toggleChecked,
             ),
-            Center(child: Text('Entry X')),
+            Center(child: Text('Entry ${widget.name}')),
             // Yeah don't ask me why but it works...
             Spacer(),
             Spacer(),
