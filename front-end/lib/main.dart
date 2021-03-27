@@ -56,6 +56,7 @@ class LoginScreen extends StatelessWidget {
       // logo: 'images/lake.jpg',
       // onLogin: _authUser,
       // onSignup: _authUser,
+      emailValidator: invalidUsername,
       onSubmitAnimationCompleted: () {
         // Navigator.of(context).pushReplacement(MaterialPageRoute(
         //   builder: (context) => DashboardScreen(),
@@ -63,6 +64,10 @@ class LoginScreen extends StatelessWidget {
       },
       // onRecoverPassword: _recoverPassword,
     );
+  }
+
+  String invalidUsername(String a) {
+    return "Invalid username";
   }
 }
 
