@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'pages/HomePage.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 // import 'HomeScreen/HomeScreen.dart';
 
 void main() {
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      // home: LoginScreen(title: 'Goals'),
+      // home: LoginScreen(title: 'Achieve'),
       home: LoginScreen(),
     );
   }
@@ -59,17 +58,17 @@ class LoginScreen extends StatelessWidget {
     Future<String> submit(LoginData ld) {
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage(title: "Goals")));
+          MaterialPageRoute(builder: (context) => MyHomePage(title: "Small Steps")));
       print("Changing page");
       return Future.delayed(
         Duration(seconds: 2),
-            () => 'Large Latte',
+            () => 'Failed Login',
       );
     }
 
     return FlutterLogin(
-      title: 'Tether',
-      // logo: 'images/lake.jpg',
+      title: 'Small Steps',
+      logo: 'images/mountain.png',
       emailValidator: invalidUsername,
       passwordValidator: invalidPassword,
       onLogin: submit,
