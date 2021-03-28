@@ -26,7 +26,8 @@ aws.config.update({
       s3,
       bucket: "ichelloworld",
       metadata: function (req, file, cb) {
-        cb(null, { fieldName: "TESTING_METADATA" });
+        const ext = file.mimetype.split('/')[1];
+        cb(null, { fieldName: '${file.fieldname}.${ext}'});
       },
       key: function (req, file, cb) {
         cb(null, Date.now().toString());
