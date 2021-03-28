@@ -6,6 +6,8 @@ import 'package:goal_app/pages/SearchPage.dart';
 import 'package:goal_app/pages/Goals.dart';
 import 'package:goal_app/pages/PlaceholderWidget.dart';
 import 'package:goal_app/pages/Groups.dart';
+import 'package:goal_app/pages/SingleGroup.dart';
+import 'package:goal_app/pages/SingleGoal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -45,8 +47,38 @@ class _MyHomePageState extends State<MyHomePage> {
     _onAlertPressed(context) {
       Alert(
         context: context,
-        title: "RFLUTTER ALERT",
-        desc: "Flutter is more awesome with RFlutter Alert.",
+        title: "Add item",
+        desc: "Keep going. You can do this!",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "New Goal",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () =>
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SingleGoal()
+                )
+              ),// Navigator.pop(context),
+            width: 120,
+          ),
+          DialogButton(
+            child: Text(
+              "New User",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () =>
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SingleGroup()
+                )
+              ),// Navigator.pop(context),
+            width: 120,
+          )
+        ],
       ).show();
     }
 

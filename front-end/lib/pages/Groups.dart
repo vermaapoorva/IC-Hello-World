@@ -9,7 +9,7 @@ class Groups extends StatefulWidget {
 }
 
 class _GroupsState extends State<Groups> {
-  final List<String> entries = ["Running", "Gym Training", "Mediation", "Yoga"];
+  final List<String> entries = ["Running", "Gym Training", "Mediation", "Yoga", "Walk the Dog"];
 
   // List entries =
   // @override
@@ -53,6 +53,8 @@ class _GroupsState extends State<Groups> {
                 ),
                 child: Center(
                   child: Card(
+
+                    color: Colors.green[100],
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
