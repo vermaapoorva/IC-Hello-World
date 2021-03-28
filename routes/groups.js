@@ -15,7 +15,8 @@ router.post(
     '/',
     auth,
     [
-        check('groupname', 'Group Name is required').not().isEmpty()
+        check('groupname', 'Group Name is required').not().isEmpty(),
+        check('description', 'Group description is required').not().isEmpty()
     ],
     async (req, res) => {
       const errors = validationResult(req);
@@ -23,12 +24,13 @@ router.post(
         return res.status(400).json({ errors: errors.array() });
       }   
 
-      const { groupname } = req.body;
+      const { groupname, description } = req.body;
       
       try {
 
         group = new Group({
           name: groupname,
+          description: description,
           creator: req.user.id
         });
 

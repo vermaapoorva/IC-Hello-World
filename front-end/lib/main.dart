@@ -8,7 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // const API_URL = "";
+
+  static const API_URL = "";
 
   // This widget is the root of your application.
   @override
