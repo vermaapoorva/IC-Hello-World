@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:goal_app/pages/SingleGoal.dart';
 import 'PlaceholderWidget.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Goals extends StatefulWidget {
   Goals({Key key, this.title}) : super(key: key);
@@ -10,16 +12,59 @@ class Goals extends StatefulWidget {
   _GoalsState createState() => _GoalsState();
 }
 
+class GoalObj {
+  final String goalId;
+  final String name;
+  final String groupId;
+  final String description;
+  final String frequency;
+
+  GoalObj({@required this.name, @required this.groupId, @required this.goalId, @required this.description, @required this.frequency});
+
+  factory GoalObj.fromJson(Map<String, dynamic> json) {
+    return GoalObj(
+      groupId: json["groupId"],
+      name: json["name"],
+      goalId: json["_id"],
+      description: json["description"],
+      frequency: json["frequency"],
+    );
+  }
+}
+
+Future<List<GoalObj>> fetchGoals() async {
+  var url = Uri.https("ic-small-steps.herokuapp.com", "/goals/userid/605fb0866ab50868f0c1bcbb");
+  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+  print("made request");
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    // print(response.body);
+    return List<GoalObj>.from(jsonDecode(response.body).map((x) => GoalObj.fromJson(x)));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load group');
+  }
+}
+
 class _GoalsState extends State<Goals> {
   int currentIndex;
-  final List<String> entries = <String>['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D', 'A', 'B', 'C', 'D', 'A', 'B', 'C', 'D'];
+  List<GoalObj> entries = [];
   int remainingGoals;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    currentIndex = 0;
-    remainingGoals = entries.length;
+    fetchGoals().then((value) => {
+      print(value),
+      setState(() {
+        entries = value;
+        remainingGoals = entries.length;
+        currentIndex = 0;
+      })
+    });
   }
 
   void changePage(int index) {
@@ -38,7 +83,7 @@ class _GoalsState extends State<Goals> {
           SizedBox(height: 15),
           Center(child: RichText(
             text: TextSpan(
-              text: '5',
+              text: entries.length.toString(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -62,9 +107,9 @@ class _GoalsState extends State<Goals> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: const EdgeInsets.all(20),
-              itemCount: entries.length,
+              itemCount: entries.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
-                return Goal(name: entries[index]);
+                return Goal(name: entries[index].name);
                 //   Container(
                 //   height: 50,
                 //   decoration: BoxDecoration(
@@ -164,7 +209,7 @@ class _Goal extends State<Goal> {
                   radius: 15.0,
                 ),
                 SizedBox(width: 10),
-                Center(child: Text('Entry ${widget.name}')),
+                Center(child: Text('${widget.name}')),
                 // Yeah don't ask me why but it works...
                 Spacer(),
                 Spacer(),
