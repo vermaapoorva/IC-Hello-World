@@ -58,7 +58,10 @@ class _GroupsState extends State<Groups> {
                       children: <Widget>[
                         SizedBox(height: 5),
                         ListTile(
-                          leading: Icon(Icons.accessibility_new_sharp),
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage('images/winston-churchill.jpg'),
+                            radius: 20.0,
+                          ),
                           title: Text(entries[index]),
                           subtitle: Text('Description goes here.'),
                         ),

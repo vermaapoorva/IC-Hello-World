@@ -133,42 +133,53 @@ class _Goal extends State<Goal> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          color: (_isChecked ? Colors.lightGreen[200] : Colors.orange[200]),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+    return InkWell(
+        onTap: () {},
+        child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              color: (_isChecked ? Colors.lightGreen[200] : Colors.orange[200]),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            IconButton(
-                icon: (_isChecked ? Icon(Icons.check_box_outlined) : Icon(Icons.check_box_outline_blank)),
-                onPressed: _toggleChecked,
-            ),
-            Center(child: Text('Entry ${widget.name}')),
-            // Yeah don't ask me why but it works...
-            Spacer(),
-            Spacer(),
-            Spacer(),
-            Spacer(),
-            Spacer(),
-            Spacer(),
-            Expanded(child:
-            IconButton(
-              icon: Icon(Icons.arrow_forward_ios_sharp),
-              onPressed: () {/* TODO: Function here */},
-            ),
-            ),
-          ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 10),
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/winston-churchill.jpg'),
+                  radius: 15.0,
+                ),
+                SizedBox(width: 10),
+                Center(child: Text('Entry ${widget.name}')),
+                // Yeah don't ask me why but it works...
+                Spacer(),
+                Spacer(),
+                Spacer(),
+                Spacer(),
+                Spacer(),
+                Spacer(),
+                Expanded(child:
+                // IconButton(
+                //   icon: Icon(Icons.arrow_forward_ios_sharp),
+                //   onPressed: () {/* TODO: Function here */},
+                // ),
+                IconButton(
+                  icon: (_isChecked ? Icon(Icons.check_box_outlined) : Icon(Icons.check_box_outline_blank)),
+                  onPressed: _toggleChecked,
+                ),
+
+                ),
+                SizedBox(width: 10)
+              ],
+            )
         )
     );
   }
