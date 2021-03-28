@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:goal_app/objects/Auth.dart';
 import 'pages/HomePage.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +11,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const API_URL = ""
+  static const API_URL = "ic-small-steps.herokuapp.com";
 
   // This widget is the root of your application.
   @override
@@ -35,17 +38,56 @@ class MyApp extends StatelessWidget {
 
 class LoginScreen extends StatelessWidget {
 
+  bool success = true;
+
+  void authCallback(http.Response response) {
+    print(response);
+    Map<String, dynamic> responseJson = json.decode(response.body);
+    // print(responseJson.userId);
+    Auth authObj = Auth(responseJson['userid'], responseJson['token']);
+    success = responseJson['token'] != null;
+    print("Setting: " + success.toString());
+    print(authObj.authToken);
+  }
+
+  Future<String> auth(String username, String password) {
+    Future<http.Response> userInfo = http.post(
+      Uri.https(MyApp.API_URL, 'auth'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': username,
+        'password': password,
+      }),
+    );
+    userInfo.then(authCallback);
+    // final Map authObjMap = jsonDecode(userInfo);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      return success;
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
     Future<String> submit(LoginData ld) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MyHomePage(title: "Small Steps")));
-      print("Changing page");
-      return Future.delayed(
-        Duration(seconds: 2),
-            () => 'Failed Login',
-      );
+      Future<String> authReturn = auth(ld.name, ld.password);
+      print("Setting: " + success.toString());
+      if (success) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MyHomePage(title: "Small Steps")));
+        print("Changing page");
+        return authReturn;
+      }
+      else {
+        return Future.delayed(Duration(milliseconds: 100), () {
+          return "Could not sign in, Invalid username or password";
+        });
+      }
     }
 
     return FlutterLogin(
@@ -62,7 +104,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   String invalidUsername(String a) {
-    if (a == "pass") {
+    if (true) {
       print("Username accepted");
       return null;
     }
@@ -70,7 +112,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   String invalidPassword(String a) {
-    if (a == "pass") {
+    if (a.length >= 6) {
       print("Password accepted");
       return null;
     }

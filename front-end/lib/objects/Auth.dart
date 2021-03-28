@@ -4,7 +4,7 @@ class Auth {
 
   Auth(String user, String auth) {
     userid = user;
-    authToken = auth
+    authToken = auth;
   }
 
   String getUserId() {
