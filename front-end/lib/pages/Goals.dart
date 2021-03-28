@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:goal_app/pages/SingleGoal.dart';
+import 'SingleGoal.dart';
 import 'PlaceholderWidget.dart';
 
 class Goals extends StatefulWidget {

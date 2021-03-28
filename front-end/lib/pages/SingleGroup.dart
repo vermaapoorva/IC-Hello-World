@@ -1,13 +1,47 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goal_app/objects/User.dart';
+import 'Groups.dart';
+
 
 class SingleGroup extends StatefulWidget {
+  SingleGroup({Key key, this.groupId}) : super(key: key);
+  final String groupId;
+
   @override
   SingleGroupState createState() => SingleGroupState();
 }
 
+Future<Group> fetchGroup(String groupId) async {
+  var url = Uri.https("ic-small-steps.herokuapp.com", "/groups/groupid/$groupId");
+  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+  print("made request");
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    // print(response.body);
+    // return List<Group>.from(jsonDecode(response.body).map((x) => Group.fromJson(x)));
+    // {
+    //    group: { groupname ...}
+    //    members: [{ }]
+    // }
+    Group group = jsonDecode(response.body)[0].map((x) => Group.fromJson(x));
+
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load group');
+  }
+}
+
 class SingleGroupState extends State<SingleGroup> {
   String groupName = "Group name";
+  Group group;
+  List<User> users;
+
   List<GroupMemberDisplay> groupMemberList;
   final groupMembers = [
     "Apoorva Verma",
