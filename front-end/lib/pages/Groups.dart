@@ -28,7 +28,7 @@ class Group {
 
 Future<List<Group>> fetchGroups() async {
   var url = Uri.https("ic-small-steps.herokuapp.com", "/groups/userid/605fb0866ab50868f0c1bcbb");
-  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkzMjIxMywiZXhwIjoxNjE3MzY0MjEzfQ.511OXqPmVDDG15rkrgQ057M4COH_bAB8hxVt4RH1-o0"},);
   print("made request");
   print(response.statusCode);
   if (response.statusCode == 200) {
