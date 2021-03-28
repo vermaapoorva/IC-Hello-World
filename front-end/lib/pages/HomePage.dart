@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:goal_app/pages/ProfilePage.dart';
 import 'package:goal_app/pages/SearchPage.dart';
 import 'package:goal_app/pages/Goals.dart';
 import 'package:goal_app/pages/PlaceholderWidget.dart';
@@ -16,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentIndex;
   final List<Widget> _children = [
     Goals(),
-    PlaceholderWidget(Colors.orange),
+    ProfilePage(),
     SearchPage(),
     Groups(),
     PlaceholderWidget(Colors.blue),
