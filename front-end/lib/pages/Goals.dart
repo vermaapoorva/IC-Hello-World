@@ -33,8 +33,8 @@ class GoalObj {
 }
 
 Future<List<GoalObj>> fetchGoals() async {
-  var url = Uri.https("ic-small-steps.herokuapp.com", "/goals/userid/605fb0866ab50868f0c1bcbb");
-  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+  var url = Uri.https("ic-small-steps.herokuapp.com", "/goals/userid/6060868b8f121e001512bd4f");
+  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA2MDg2OGI4ZjEyMWUwMDE1MTJiZDRmIn0sImlhdCI6MTYxNjkzODYzNSwiZXhwIjoxNjE3MzcwNjM1fQ.XOLhTd0daIVZ5ByimpQlMpc1FUz3p9VdrAByKO96aMI"},);
   print("made request");
   print(response.statusCode);
   if (response.statusCode == 200) {
