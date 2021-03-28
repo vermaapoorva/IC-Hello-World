@@ -26,9 +26,9 @@ class SingleGroupState extends State<SingleGroup> {
 
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
-            body: SafeArea(
-                child: Column(children: [
+    return Scaffold(
+        body: SafeArea(
+            child: Column(children: [
       Container(
           decoration: BoxDecoration(
               image: DecorationImage(

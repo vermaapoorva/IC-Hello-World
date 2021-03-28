@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:goal_app/pages/SingleGoal.dart';
 import 'PlaceholderWidget.dart';
 
 class Goals extends StatefulWidget {
@@ -30,6 +31,7 @@ class _GoalsState extends State<Goals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -134,7 +136,11 @@ class _Goal extends State<Goal> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SingleGoal()));
+        },
         child: Container(
             height: 50,
             decoration: BoxDecoration(

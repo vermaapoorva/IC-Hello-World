@@ -8,6 +8,7 @@ const { check, validationResult } = require('express-validator');
 const Group = require('../models/Group');
 const Member = require('../models/Member');
 const User = require('../models/User');
+const Goal = require('../models/Goal');
 
 // Create a new group
 router.post(
@@ -50,17 +51,18 @@ router.post(
 );
 
 // get a group by groupid
-router.get('/groupid/:groupid', auth, async({ params: { groupid }}, res) => {
+router.get('/groupId/:groupId', auth, async({ params: { groupId }}, res) => {
   try {
-    let group = await Group.findOne({ _id : groupid });
-    var members = [] 
+    let group = await Group.findById(groupId);
+    var goals = await Goal.find({ groupid: groupId });
+    var members = [];
     
-    for(const member of (await Member.find({ group: groupid }).select('user'))) {
+    for(const member of (await Member.find({ group: groupId }).select('user'))) {
       let user = await User.findById(member.user).select('-password');
       members.push(user);
     };
 
-    res.json({group, members});
+    res.json({group, goals, members});
 
   } catch (err) {
     console.error(err.message);

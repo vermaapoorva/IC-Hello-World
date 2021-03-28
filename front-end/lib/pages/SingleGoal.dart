@@ -9,11 +9,8 @@ class SingleGoal extends StatefulWidget {
 class SingleGoalState extends State<SingleGoal> {
   String groupName = "Goal Name";
   final groupMembers = [
-    "Apoorva Verma",
-    "Gavin Wu",
-    "Rohan Gupta",
-    "Rahil Shah",
-    "Alex Usher"
+    "Flat 10",
+    "Family"
   ];
   bool isEnable = false;
   int currentIndex = 0;
