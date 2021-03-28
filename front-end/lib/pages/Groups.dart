@@ -108,7 +108,7 @@ class _GroupsState extends State<Groups> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SingleGroup()
+                                        builder: (context) => SingleGroup(group: groups[index],)
                                     )
                                 );
                               },

@@ -73,6 +73,18 @@ class _GoalsState extends State<Goals> {
     });
   }
 
+  refresh1() {
+    setState(() {
+      remainingGoals = remainingGoals + 1;
+    });
+  }
+
+  refresh2() {
+    setState(() {
+      remainingGoals = remainingGoals - 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +95,7 @@ class _GoalsState extends State<Goals> {
           SizedBox(height: 15),
           Center(child: RichText(
             text: TextSpan(
-              text: entries.length.toString(),
+              text: remainingGoals.toString(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -109,7 +121,7 @@ class _GoalsState extends State<Goals> {
               padding: const EdgeInsets.all(20),
               itemCount: entries.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
-                return Goal(name: entries[index].name);
+                return Goal(name: entries[index].name, notifyParent1: refresh1, notifyParent2: refresh2);
                 //   Container(
                 //   height: 50,
                 //   decoration: BoxDecoration(
@@ -155,7 +167,9 @@ class _GoalsState extends State<Goals> {
 }
 
 class Goal extends StatefulWidget {
-  Goal({Key key, this.name}) : super(key: key);
+  final Function() notifyParent1;
+  final Function() notifyParent2;
+  Goal({Key key, this.name, @required this.notifyParent1, @required this.notifyParent2}) : super(key: key);
   final String name;
   // String name;
   // Goal(String name) {
@@ -172,8 +186,10 @@ class _Goal extends State<Goal> {
     setState(() {
       if (_isChecked) {
         _isChecked = false;
+        widget.notifyParent1();
       } else {
         _isChecked = true;
+        widget.notifyParent2();
       }
     });
   }

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Groups.dart';
 
 class SingleGroup extends StatefulWidget {
+  SingleGroup({Key key, this.group}) : super(key: key);
+  final Group group;
   @override
   SingleGroupState createState() => SingleGroupState();
 }
@@ -45,7 +48,7 @@ class SingleGroupState extends State<SingleGroup> {
       SizedBox(
         height: 60,
       ),
-      Text(groupName,
+      Text(widget.group.name,
           style: TextStyle(
               fontSize: 25.0,
               color: Colors.blueGrey,
@@ -55,7 +58,7 @@ class SingleGroupState extends State<SingleGroup> {
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
         Expanded(
             child: !isEnable
-                ? Text(groupName, style: TextStyle(fontSize: 20.0))
+                ? Text(widget.group.name, style: TextStyle(fontSize: 20.0))
                 : TextFormField(
                     initialValue: groupName,
                     textInputAction: TextInputAction.done,
