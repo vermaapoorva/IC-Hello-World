@@ -1,13 +1,76 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goal_app/pages/Groups.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class Member {
+  // Some fields
+  final String userId;
+  final String username;
+  final String name;
+  final String email;
+  final String v;
+
+  Member({
+    @required this.userId,
+    @required this.username,
+    @required this.name,
+    @required this.email,
+    @required this.v
+  });
+
+  factory Member.fromJson(Map<String, dynamic> json) {
+    return Member(
+      userId: json["_id"],
+      username: json["username"],
+      name: json["name"],
+      email: json["email"],
+      v: json["__v"],
+    );
+  }
+}
+
+Future<List<Member>> fetchMembers() async {
+  var url = Uri.https("ic-small-steps.herokuapp.com", "/groups/groupid/605fb0866ab50868f0c1bcbb");
+  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+  print("made request");
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    // print(response.body);
+    return List<Member>.from(jsonDecode(response.body).map((x) => Member.fromJson(x)));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load group');
+  }
+}
+
 
 class SingleGroup extends StatefulWidget {
+  SingleGroup({Key key, this.group}) : super(key: key);
+  final Group group;
   @override
   SingleGroupState createState() => SingleGroupState();
 }
 
 class SingleGroupState extends State<SingleGroup> {
-  String groupName = "Group name";
+  String groupName = "hello";
+  List<Member> members = [];
+  @override
+  initState() {
+    super.initState();
+    fetchMembers().then((value) => {
+      print(value),
+      setState(() {
+        members = value;
+      })
+    });
+    print(members);
+  }
+
   List<GroupMemberDisplay> groupMemberList;
   final groupMembers = [
     "Apoorva Verma",
@@ -45,7 +108,7 @@ class SingleGroupState extends State<SingleGroup> {
       SizedBox(
         height: 60,
       ),
-      Text(groupName,
+      Text(widget.group.name,
           style: TextStyle(
               fontSize: 25.0,
               color: Colors.blueGrey,
@@ -55,9 +118,9 @@ class SingleGroupState extends State<SingleGroup> {
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
         Expanded(
             child: !isEnable
-                ? Text(groupName, style: TextStyle(fontSize: 20.0))
+                ? Text(widget.group.name, style: TextStyle(fontSize: 20.0))
                 : TextFormField(
-                    initialValue: groupName,
+                    initialValue: widget.group.name,
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (value) {
                       setState(() {
