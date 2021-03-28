@@ -16,14 +16,19 @@ class SingleGroupState extends State<SingleGroup> {
     "Rahil Shah",
     "Alex Usher"
   ];
+  final goalsForGroup = [
+    "Drink more water",
+    "Exercise for 20 minutes",
+    "Get out of the house for half an hour"
+  ];
   bool isEnable = false;
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: Column(children: [
+        return Scaffold(
+            body: SafeArea(
+                child: Column(children: [
       Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -46,9 +51,8 @@ class SingleGroupState extends State<SingleGroup> {
               color: Colors.blueGrey,
               letterSpacing: 2.0,
               fontWeight: FontWeight.w400)),
-      SizedBox(height: 15),
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+      SizedBox(height: 10),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
         Expanded(
             child: !isEnable
                 ? Text(groupName, style: TextStyle(fontSize: 20.0))
@@ -70,6 +74,13 @@ class SingleGroupState extends State<SingleGroup> {
               });
             })
       ]),
+      SizedBox(height: 10),
+      Text("Group members",
+          style: TextStyle(
+              fontSize: 25.0,
+              color: Colors.blueGrey,
+              letterSpacing: 2.0,
+              fontWeight: FontWeight.w400)),
       Flexible(
           child: ListView.builder(
               scrollDirection: Axis.vertical,
@@ -96,22 +107,58 @@ class SingleGroupState extends State<SingleGroup> {
                     },
                   )),
         IconButton(
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.add),
             onPressed: () {
               setState(() {
                 isEnable = true;
               });
             })
-      ])
-      // Row(children: <Widget>[
-      //   new ListView.builder(
-      //       shrinkWrap: true,
-      //       padding: const EdgeInsets.all(0.0),
-      //       itemBuilder: (context, i) {
-      //         return buildRow(groupMemberList[i]);
-      //       }
-      //   )
-      // ],)
+      ]),
+      SizedBox(
+        height: 10,
+      ),
+      Text("Here are your goals",
+          style: TextStyle(
+              fontSize: 25.0,
+              color: Colors.blueGrey,
+              letterSpacing: 2.0,
+              fontWeight: FontWeight.w400)),
+      Flexible(
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(20),
+              itemCount: goalsForGroup.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    leading: Icon(Icons.account_circle),
+                    title: Text(goalsForGroup[index]));
+              })),
+      SizedBox(
+        height: 10,
+      ),
+      Row(children: <Widget>[
+        Expanded(
+            child: !isEnable
+                ? Text("Add new goal", style: TextStyle(fontSize: 20.0))
+                : TextFormField(
+                    initialValue: "Add new goal",
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (value) {
+                      setState(() {
+                        isEnable = false;
+                        goalsForGroup.add(value);
+                      });
+                    },
+                  )),
+        IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              setState(() {
+                isEnable = true;
+              });
+            })
+      ]),
     ])));
   }
 
