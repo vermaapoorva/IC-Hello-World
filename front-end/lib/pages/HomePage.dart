@@ -5,6 +5,7 @@ import 'package:goal_app/pages/SearchPage.dart';
 import 'package:goal_app/pages/Goals.dart';
 import 'package:goal_app/pages/PlaceholderWidget.dart';
 import 'package:goal_app/pages/Groups.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -38,13 +39,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // The easiest way for creating RFlutter Alert
+    _onAlertPressed(context) {
+      Alert(
+        context: context,
+        title: "RFLUTTER ALERT",
+        desc: "Flutter is more awesome with RFlutter Alert.",
+      ).show();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: _children[currentIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _onAlertPressed(context),
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
       ),
