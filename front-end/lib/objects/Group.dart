@@ -12,6 +12,6 @@ class Group {
   }
 
   String getGroupName() {
-    return groupName
+    return groupName;
   }
 }
