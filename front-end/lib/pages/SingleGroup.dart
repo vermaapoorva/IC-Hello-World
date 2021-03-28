@@ -8,7 +8,14 @@ class SingleGroup extends StatefulWidget {
 
 class SingleGroupState extends State<SingleGroup> {
   String groupName = "Group name";
-  final groupMembers = ["Apoorva Verma", "Gavin Wu", "Rohan Gupta", "Rahil Shah", "Alex Usher"];
+  List<GroupMemberDisplay> groupMemberList;
+  final groupMembers = [
+    "Apoorva Verma",
+    "Gavin Wu",
+    "Rohan Gupta",
+    "Rahil Shah",
+    "Alex Usher"
+  ];
   bool isEnable = false;
   int currentIndex = 0;
 
@@ -40,7 +47,8 @@ class SingleGroupState extends State<SingleGroup> {
               letterSpacing: 2.0,
               fontWeight: FontWeight.w400)),
       SizedBox(height: 15),
-      Row(children: <Widget>[
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
         Expanded(
             child: !isEnable
                 ? Text(groupName, style: TextStyle(fontSize: 20.0))
@@ -62,6 +70,65 @@ class SingleGroupState extends State<SingleGroup> {
               });
             })
       ]),
+      Flexible(
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(20),
+              itemCount: groupMembers.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    leading: Icon(Icons.account_circle),
+                    title: Text(groupMembers[index]));
+              })),
+      Row(children: <Widget>[
+        Expanded(
+            child: !isEnable
+                ? Text("Add new member", style: TextStyle(fontSize: 20.0))
+                : TextFormField(
+                    initialValue: "Add new member",
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (value) {
+                      setState(() {
+                        isEnable = false;
+                        groupMembers.add(value);
+                      });
+                    },
+                  )),
+        IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              setState(() {
+                isEnable = true;
+              });
+            })
+      ])
+      // Row(children: <Widget>[
+      //   new ListView.builder(
+      //       shrinkWrap: true,
+      //       padding: const EdgeInsets.all(0.0),
+      //       itemBuilder: (context, i) {
+      //         return buildRow(groupMemberList[i]);
+      //       }
+      //   )
+      // ],)
     ])));
   }
+
+  Widget buildRow(GroupMemberDisplay groupMember) {
+    return new ListTile(
+      leading: new CircleAvatar(
+        backgroundImage: new AssetImage('images/winston-churchill.jpeg'),
+      ),
+      title: new Text(groupMember.name, style: TextStyle(fontSize: 20.0)),
+      subtitle: new Text(groupMember.username),
+    );
+  }
+}
+
+class GroupMemberDisplay {
+  final String username;
+  final String name;
+
+  const GroupMemberDisplay(this.name, this.username);
 }
