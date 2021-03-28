@@ -33,15 +33,25 @@ class _GoalsState extends State<Goals> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 15),
           Center(child: RichText(
             text: TextSpan(
-              text: '5 Tasks Remaining',
+              text: '5',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
-                color: Colors.blue[900],
+                color: Colors.deepOrangeAccent,
               ),
+              children: [
+                TextSpan(
+                  text: ' Tasks Remaining',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.blue[900],
+                  )
+                )
+              ]
             ),
           ),
           ),
