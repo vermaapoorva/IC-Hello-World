@@ -33,16 +33,17 @@ class _GoalsState extends State<Goals> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          RichText(
+          SizedBox(height: 10),
+          Center(child: RichText(
             text: TextSpan(
-              text: 'Welcome back, ' + 'NAME.' + ' You have ' + 'X' + ' tasks remaining today!'
-                    ' (yes, this will be improved)',
+              text: '5 Tasks Remaining',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
-                color: Colors.orange,
+                color: Colors.blue[900],
               ),
             ),
+          ),
           ),
           Flexible(
             child: ListView.separated(
@@ -125,7 +126,7 @@ class _Goal extends State<Goal> {
     return Container(
         height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(2.0)),
           color: (_isChecked ? Colors.lightBlueAccent : Colors.blueAccent),
           boxShadow: [
             BoxShadow(
