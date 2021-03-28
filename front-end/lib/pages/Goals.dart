@@ -126,8 +126,8 @@ class _Goal extends State<Goal> {
     return Container(
         height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(2.0)),
-          color: (_isChecked ? Colors.lightBlueAccent : Colors.blueAccent),
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          color: (_isChecked ? Colors.lightGreen[200] : Colors.orange[200]),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -152,7 +152,12 @@ class _Goal extends State<Goal> {
             Spacer(),
             Spacer(),
             Spacer(),
-            Expanded(child: Icon(Icons.arrow_forward_ios_sharp))
+            Expanded(child:
+            IconButton(
+              icon: Icon(Icons.arrow_forward_ios_sharp),
+              onPressed: () {/* TODO: Function here */},
+            ),
+            ),
           ],
         )
     );
