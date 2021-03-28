@@ -8,7 +8,9 @@ class SingleGroup extends StatefulWidget {
 
 class SingleGroupState extends State<SingleGroup> {
   String groupName = "Group name";
+  final groupMembers = ["Apoorva Verma", "Gavin Wu", "Rohan Gupta", "Rahil Shah", "Alex Usher"];
   bool isEnable = false;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class SingleGroupState extends State<SingleGroup> {
       SizedBox(
         height: 60,
       ),
-      Text("Group name insert here",
+      Text(groupName,
           style: TextStyle(
               fontSize: 25.0,
               color: Colors.blueGrey,
@@ -59,7 +61,7 @@ class SingleGroupState extends State<SingleGroup> {
                 isEnable = true;
               });
             })
-      ])
+      ]),
     ])));
   }
 }
