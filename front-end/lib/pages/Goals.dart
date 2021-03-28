@@ -22,6 +22,23 @@ class _GoalsState extends State<Goals> {
     remainingGoals = entries.length;
   }
 
+  Future<List<Goal>> fetchGoals() async {
+    var url = Uri.https("ic-small-steps.herokuapp.com", "/goals/userid/605fb0866ab50868f0c1bcbb");
+    final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+    print("made request");
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      // print(response.body);
+      return List<Goal>.from(jsonDecode(response.body).map((x) => Goal.fromJson(x)));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load group');
+    }
+  }
+
   void changePage(int index) {
     setState(() {
       currentIndex = index;
