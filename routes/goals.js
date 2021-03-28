@@ -9,6 +9,7 @@ const User = require("../models/User");
 const Goal = require("../models/Goal");
 const UserGoal = require("../models/UserGoal");
 const Member = require("../models/Member");
+const Group = require("../models/Group");
 
 router.post(
   "/",
@@ -120,8 +121,59 @@ router.post(
   }
 );
 
+// get goal, group for a goal 
+router.get("/goalid/:goalId", auth, async ({params: { goalId }}, res) => {
+  try {
+    let goal = await Goal.findOneById(goalId);
+    
+    if(!goal) {
+      return res.status(400).json({ errors: [{ msg: "Couldn't find the given goal" }] });
+    }
+
+    let group = await Group.findOneById(goal.groupid);
+  
+    res.json(goal, group);    
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.post('/update', 
+            auth,
+            [
+              check('goalId', 'Goal Id must be given').not().isEmpty(),
+              check('goalName', "Goal name must be given").not().isEmpty(),
+              check('frequency', "Frequency must be given").not().isEmpty()
+            ], async(req, res) => {
+              try {
+                const { goalid, goalname, frequency } = req.body;
+                let goal = await Goal.findById(goalid);
+
+                if(!goal) {
+                  res.status(400).json({errors: [{msg: "Couldn't find the given goal"}] });
+                }
+
+                goal.goalname = goalname;
+                goal.frequency = frequency;
+
+                await goal.save();
+
+                let usergoals = await UserGoal.find({goalid: goalid});
+
+                for(var i = 0; i < usergoals.length; i++) {
+                  updateGoal(userGoal);
+                }
+
+                res.send("done");
+              } catch (err) {
+                console.error(err.message);
+                res.status(500).send("Server Error");
+              }
+            }); 
+
 // get all goals for a userid
-router.get("/:userId", auth, async ({ params: { userId } }, res) => {
+router.get("/userid/:userId", auth, async ({ params: { userId } }, res) => {
   try {
     let usergoals = await UserGoal.find({ userid: userId });
 
