@@ -30,6 +30,7 @@ class _GoalsState extends State<Goals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
