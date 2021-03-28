@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
 
     return FlutterLogin(
       title: 'Small Steps',
-      logo: 'images/mountain.png',
+      // logo: 'images/mountain.png',
       emailValidator: invalidUsername,
       passwordValidator: invalidPassword,
       onLogin: submit,

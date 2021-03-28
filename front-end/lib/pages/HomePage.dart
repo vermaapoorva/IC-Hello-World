@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:goal_app/pages/ProfilePage.dart';
+import 'package:goal_app/pages/SingleGoal.dart';
 import 'package:goal_app/pages/SearchPage.dart';
 import 'package:goal_app/pages/Goals.dart';
 import 'package:goal_app/pages/PlaceholderWidget.dart';
@@ -20,8 +21,9 @@ class _MyHomePageState extends State<MyHomePage> {
     Goals(),
     ProfilePage(),
     SearchPage(),
+    SingleGoal(),
     Groups(),
-    PlaceholderWidget(Colors.blue),
+    // PlaceholderWidget(Colors.blue),
   ];
 
   @override
@@ -61,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BubbleBottomBar(
         hasNotch: true,
+        hasInk: true,
         fabLocation: BubbleBottomBarFabLocation.end,
         opacity: .2,
         currentIndex: currentIndex,
