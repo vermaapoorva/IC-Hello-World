@@ -43,7 +43,6 @@ class UserSearch extends SearchDelegate<String> {
   // This needs to be a profile
   @override
   Widget buildResults(BuildContext context) {
-    history.add(query);
     return Card(
       color: Colors.red,
       child: Center(
