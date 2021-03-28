@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
     username: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true
     },
     name: {
       type: String,
@@ -24,5 +24,7 @@ const UserSchema = new mongoose.Schema({
     // }    
   });
   
-  module.exports = mongoose.model('user', UserSchema);
+
+UserSchema.index({username: 'text'});
+module.exports = mongoose.model('user', UserSchema);
   

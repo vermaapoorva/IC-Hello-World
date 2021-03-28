@@ -3,16 +3,17 @@ const Schema = mongoose.Schema;
 
 const GoalSchema = new Schema({
   group: {
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
+    required: true
   },
   name: {
     type: String,
     required: true
   },
-  icon: {
-    type: String
-  },
-  descripion: {
+  // icon: {
+  //   type: String
+  // },
+  description: {
     type: String
   },
   frequency: {
