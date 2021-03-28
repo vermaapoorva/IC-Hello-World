@@ -32,4 +32,5 @@ class Goal {
   String getFrequency() {
     return frequency;
   }
+
 }

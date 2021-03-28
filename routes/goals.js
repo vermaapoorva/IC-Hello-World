@@ -188,6 +188,7 @@ router.get("/userid/:userId", auth, async ({ params: { userId } }, res) => {
       list.push({
         "goalid" : usergoal.goalid,
         "completed" : usergoal.completed,
+        "groupid": goal.groupid,
         "name" : goal.name,
         "description" : goal.description,
         "frequency" : goal.frequency
