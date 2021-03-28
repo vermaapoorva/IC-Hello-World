@@ -3,8 +3,11 @@ const Schema = mongoose.Schema;
 
 const GroupSchema = new mongoose.Schema({
     name: {
-      typ: String,
+      type: String,
       required: true
+    },
+    description: {
+        type: String
     },
     creator: {
       type: Schema.Types.ObjectId

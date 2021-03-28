@@ -2,29 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'PlaceholderWidget.dart';
 import 'SingleGroup.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Groups extends StatefulWidget {
   @override
   _GroupsState createState() => _GroupsState();
 }
 
+class Group {
+  final String groupId;
+  final String creator;
+  final String name;
+
+  Group({@required this.name, @required this.groupId, @required this.creator});
+
+  factory Group.fromJson(Map<String, dynamic> json) {
+    return Group(
+      groupId: json["_id"],
+      creator: json["creator"],
+      name: json["name"],
+    );
+  }
+}
+
+Future<List<Group>> fetchGroups() async {
+  var url = Uri.https("ic-small-steps.herokuapp.com", "/groups/userid/605fb0866ab50868f0c1bcbb");
+  final response = await http.get(url, headers: {"x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA1ZmIwODY2YWI1MDg2OGYwYzFiY2JiIn0sImlhdCI6MTYxNjkwNTY1MywiZXhwIjoxNjE3MzM3NjUzfQ.ROJ43aYbDjkbpGPnbEqo2-ilYMAhxwI6mLVWG0lvXbY"},);
+  print("made request");
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    // print(response.body);
+    return List<Group>.from(jsonDecode(response.body).map((x) => Group.fromJson(x)));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load group');
+  }
+}
+
 class _GroupsState extends State<Groups> {
-  final List<String> entries = ["Running", "Gym Training", "Mediation", "Yoga", "Walk the Dog"];
 
-  // List entries =
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   currentIndex = 0;
-  //   remainingGoals = entries.length;
-  // }
+  List<Group> groups = [];
 
-  // void changePage(int index) {
-  //   setState(() {
-  //     currentIndex = index;
-  //   });
-  // }
+  @override
+  initState() {
+    super.initState();
+    fetchGroups().then((value) => {
+      print(value),
+      setState(() {
+        groups = value;
+      })
+    });
+    print(groups);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +70,7 @@ class _GroupsState extends State<Groups> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(20),
-            itemCount: entries.length,
+            itemCount: groups.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 decoration: BoxDecoration(
@@ -53,8 +86,6 @@ class _GroupsState extends State<Groups> {
                 ),
                 child: Center(
                   child: Card(
-
-                    color: Colors.green[100],
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -64,7 +95,7 @@ class _GroupsState extends State<Groups> {
                             backgroundImage: AssetImage('images/winston-churchill.jpg'),
                             radius: 20.0,
                           ),
-                          title: Text(entries[index]),
+                          title: Text(groups[index].name),
                           subtitle: Text('Description goes here.'),
                         ),
                         Row(
@@ -96,6 +127,7 @@ class _GroupsState extends State<Groups> {
           ),
         ),
       ],
-    ));
+    )
+    );
   }
 }
