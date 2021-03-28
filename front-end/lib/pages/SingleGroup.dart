@@ -96,7 +96,7 @@ class SingleGroupState extends State<SingleGroup> {
                     },
                   )),
         IconButton(
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.add),
             onPressed: () {
               setState(() {
                 isEnable = true;

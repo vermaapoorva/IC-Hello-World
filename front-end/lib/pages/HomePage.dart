@@ -21,8 +21,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Goals(),
     ProfilePage(),
     SearchPage(),
-    SingleGoal(),
     Groups(),
+    // SingleGoal(),
     // PlaceholderWidget(Colors.blue),
   ];
 
